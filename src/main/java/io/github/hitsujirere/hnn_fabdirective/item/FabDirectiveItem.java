@@ -1,6 +1,11 @@
 package io.github.hitsujirere.hnn_fabdirective.item;
 
+import dev.shadowsoffire.hostilenetworks.data.DataModel;
 import dev.shadowsoffire.hostilenetworks.tile.LootFabTileEntity;
+import dev.shadowsoffire.placebo.reload.DynamicHolder;
+import io.github.hitsujirere.hnn_fabdirective.accessor.ISelectionsAccessor;
+import io.github.hitsujirere.hnn_fabdirective.util.SavedSelections;
+import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
@@ -42,12 +47,23 @@ public class FabDirectiveItem extends Item {
             }
 
             if (player.isSecondaryUseActive()) {
-                player.sendSystemMessage(Component.translatable("text.hnn_fabdirective.selections_applied", 0, stack.getDisplayName()).withStyle(style -> style.withColor(ChatFormatting.GREEN)));
-                return InteractionResult.SUCCESS;
+                SavedSelections selections = SavedSelections.read(stack.getTagElement("fab_selections"));
+                if (!selections.isEmpty()) {
+                    ISelectionsAccessor selectionsAccessor = (ISelectionsAccessor) lootFab;
+                    selectionsAccessor.setSelections(selections.getSelections());
+                    player.sendSystemMessage(Component.translatable("text.hnn_fabdirective.selections_applied", selectionsAccessor.getSelections().size(), stack.getDisplayName()).withStyle(ChatFormatting.GREEN));
+                    return InteractionResult.SUCCESS;
+                }
             } else {
-                player.sendSystemMessage(Component.translatable("text.hnn_fabdirective.selections_copied", 0, stack.getDisplayName()).withStyle(style -> style.withColor(ChatFormatting.GREEN)));
+                ISelectionsAccessor selectionsAccessor = (ISelectionsAccessor) lootFab;
+                Object2IntMap<DynamicHolder<DataModel>> fabSelections = selectionsAccessor.getSelections();
+                SavedSelections selections = new SavedSelections(fabSelections);
+                stack.getOrCreateTag().put("fab_selections", selections.write());
+                player.sendSystemMessage(Component.translatable("text.hnn_fabdirective.selections_copied", selectionsAccessor.getSelections().size(), stack.getDisplayName()).withStyle(ChatFormatting.GREEN));
                 return InteractionResult.SUCCESS;
             }
+
+            return InteractionResult.FAIL;
         }
 
         return super.useOn(ctx);
@@ -65,5 +81,4 @@ public class FabDirectiveItem extends Item {
         list.add(Component.translatable(this.getDescriptionId() + ".desc").withStyle(ChatFormatting.GRAY));
         list.add(Component.translatable(this.getDescriptionId() + ".desc2").withStyle(ChatFormatting.GRAY));
     }
-
 }
