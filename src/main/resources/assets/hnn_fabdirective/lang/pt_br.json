@@ -1,0 +1,13 @@
+{
+  "item.hnn_fabdirective.fab_directive": "Diretiva de Fabricação",
+  "item.hnn_fabdirective.fab_directive.desc": "Armazena seleções de um Fabricador de Loot",
+  "item.hnn_fabdirective.fab_directive.desc2": "Botão Direito para copiar, Shift+Botão Direito para aplicar",
+  "text.hnn_fabdirective.stored_selection": "Seleção Armazenada %s/%s",
+  "text.hnn_fabdirective.invalid_selection.model": "Seleção com erro: Modelo não reconhecido (%s)",
+  "text.hnn_fabdirective.invalid_selection.index": "Seleção com erro: Índice inválido (%s)",
+  "text.hnn_fabdirective.scroll": "[rolar]",
+  "text.hnn_fabdirective.shift": "[shift]",
+  "text.hnn_fabdirective.selection": "%s -> %s %s",
+  "text.hnn_fabdirective.selections_applied": "%s seleções aplicadas de %s",
+  "text.hnn_fabdirective.selections_copied": "%s seleções copiadas de %s"
+}
