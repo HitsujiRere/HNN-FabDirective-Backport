@@ -1,0 +1,13 @@
+{
+  "item.hnn_fabdirective.fab_directive": "Fabrication Directive",
+  "item.hnn_fabdirective.fab_directive.desc": "Stores selections from a Loot Fabricator",
+  "item.hnn_fabdirective.fab_directive.desc2": "Right-Click to copy, Shift-Right-Click to apply",
+  "text.hnn_fabdirective.stored_selection": "Stored Selection %s/%s",
+  "text.hnn_fabdirective.invalid_selection.model": "Errored Selection: Unrecognized Model (%s)",
+  "text.hnn_fabdirective.invalid_selection.index": "Errored Selection: Invalid Index (%s)",
+  "text.hnn_fabdirective.scroll": "[scroll]",
+  "text.hnn_fabdirective.shift": "[shift]",
+  "text.hnn_fabdirective.selection": "%s -> %s %s",
+  "text.hnn_fabdirective.selections_applied": "Applied %s selections from %s",
+  "text.hnn_fabdirective.selections_copied": "Copied %s selections from %s"
+}
