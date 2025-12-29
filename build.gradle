@@ -86,8 +86,8 @@ minecraft {
             // Comma-separated list of namespaces to load gametests from. Empty = all namespaces.
             property 'forge.enabledGameTestNamespaces', mod_id
 
-            property 'mixin.env.remapRefMap', 'true'
-            property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
+            // property 'mixin.env.remapRefMap', 'true'
+            // property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
         }
 
         server {
@@ -111,6 +111,7 @@ minecraft {
         }
     }
 }
+
 
 mixin {
     add sourceSets.main, 'mixins.hnn_fabdirective.refmap.json'
@@ -162,6 +163,7 @@ dependencies {
 
     // Apply Mixin AP
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
+    annotationProcessor fg.deobf("curse.maven:hostile-neural-networks-552574:${hnn_version}")
 
     // Example mod dependency with JEI - using fg.deobf() ensures the dependency is remapped to your development mappings
     // The JEI API is declared for compile time use, while the full JEI artifact is used at runtime
@@ -181,7 +183,7 @@ dependencies {
     implementation fg.deobf("curse.maven:hostile-neural-networks-552574:${hnn_version}")
     implementation fg.deobf("dev.shadowsoffire:Placebo:${minecraft_version}-${placebo_version}")
     // implementation fg.deobf("top.theillusivec4.curios:curios-forge:${curios_version}+${minecraft_version}")
-    implementation fg.deobf("curse.maven:placebo-283644:${curios_version}")
+    runtimeOnly fg.deobf("curse.maven:curios-309927:${curios_version}")
     runtimeOnly fg.deobf("mezz.jei:jei-${minecraft_version}-forge:${jei_version}")
 }
 
@@ -191,11 +193,11 @@ dependencies {
 // See https://docs.gradle.org/current/dsl/org.gradle.language.jvm.tasks.ProcessResources.html
 tasks.named('processResources', ProcessResources).configure {
     var replaceProperties = [
-            minecraft_version: minecraft_version, minecraft_version_range: minecraft_version_range,
-            forge_version: forge_version, forge_version_range: forge_version_range,
+            minecraft_version   : minecraft_version, minecraft_version_range: minecraft_version_range,
+            forge_version       : forge_version, forge_version_range: forge_version_range,
             loader_version_range: loader_version_range,
-            mod_id: mod_id, mod_name: mod_name, mod_license: mod_license, mod_version: mod_version,
-            mod_authors: mod_authors, mod_description: mod_description,
+            mod_id              : mod_id, mod_name: mod_name, mod_license: mod_license, mod_version: mod_version,
+            mod_authors         : mod_authors, mod_description: mod_description,
     ]
     inputs.properties replaceProperties
 

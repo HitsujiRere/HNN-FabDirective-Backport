@@ -2,6 +2,7 @@
   "required": true,
   "minVersion": "0.8",
   "package": "io.github.hitsujirere.hnn_fabdirective.mixin",
+  "refmap": "mixins.hnn_fabdirective.refmap.json",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
     "LootFabBlockMixin",
