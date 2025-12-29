@@ -3,10 +3,11 @@ package io.github.hitsujirere.hnn_fabdirective.item;
 import dev.shadowsoffire.hostilenetworks.data.DataModel;
 import dev.shadowsoffire.hostilenetworks.tile.LootFabTileEntity;
 import dev.shadowsoffire.hostilenetworks.util.Color;
-import dev.shadowsoffire.placebo.PlaceboClient;
 import dev.shadowsoffire.placebo.reload.DynamicHolder;
 import io.github.hitsujirere.hnn_fabdirective.accessor.ISelectionsAccessor;
+import io.github.hitsujirere.hnn_fabdirective.client.ScrollClient;
 import io.github.hitsujirere.hnn_fabdirective.util.SavedSelections;
+import io.github.hitsujirere.hnn_fabdirective.util.IScrollableItem;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import it.unimi.dsi.fastutil.objects.ObjectIterator;
 import net.minecraft.ChatFormatting;
@@ -34,7 +35,7 @@ import java.util.List;
  * <p>
  * It can copy the targets from a fabricator and apply them to another. It can also be used to open a GUI to configure targets on-the-fly.
  */
-public class FabDirectiveItem extends Item {
+public class FabDirectiveItem extends Item implements IScrollableItem {
 
     public FabDirectiveItem(Properties properties) {
         super(properties);
@@ -103,7 +104,7 @@ public class FabDirectiveItem extends Item {
             list.add(CommonComponents.SPACE);
 
             Object2IntMap<DynamicHolder<DataModel>> fabSelections = selections.getSelections();
-            int selIdx = selections.isEmpty() ? 0 : (int) ((PlaceboClient.ticks / 40) % selections.size());
+            int selIdx = ScrollClient.getTooltipScrollIndex(selections.size());
 
             ObjectIterator<Object2IntMap.Entry<DynamicHolder<DataModel>>> it = fabSelections.object2IntEntrySet().iterator();
             it.skip(selIdx);
