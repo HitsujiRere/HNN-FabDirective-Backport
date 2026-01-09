@@ -144,11 +144,12 @@ repositories {
         url "https://cursemaven.com"
     }
     maven {
-        // Curios
+        // for Curios
+        name "TheIllusiveC4"
         url "https://maven.theillusivec4.top"
     }
     maven {
-        // Shadows
+        name "Shadows"
         url "https://maven.shadowsoffire.dev/releases"
     }
 }

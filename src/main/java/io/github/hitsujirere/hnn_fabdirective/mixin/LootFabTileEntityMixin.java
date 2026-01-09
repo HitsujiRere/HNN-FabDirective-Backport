@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.Shadow;
 @Mixin(LootFabTileEntity.class)
 public abstract class LootFabTileEntityMixin implements ISelectionsAccessor {
 
-    @Shadow
+    @Shadow(remap = false)
     @Final
     protected Object2IntMap<DynamicHolder<DataModel>> savedSelections;
 
